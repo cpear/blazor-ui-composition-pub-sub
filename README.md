@@ -1,2 +1,2 @@
-# blazor-ui-composition-pub-sub
-Composite UI with Blazor via Component Eventing
+# Blazor UI Composition
+Building a composite UI with Blazor via component eventing and pub sub
