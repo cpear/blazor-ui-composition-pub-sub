@@ -1,0 +1,58 @@
+﻿@using HogwartsEnrollment.Models
+@using SortingHatComponents.Contracts.Events
+@using StudentComponents.Contracts.Events
+
+<div class="houseAssignments">
+    <table>
+        <tr>
+            <td>Witch or Wizards Name</td>
+            <td>House</td>
+        </tr>
+
+        @foreach (var entry in Students)
+        {
+            <tr>
+                <td>@entry.Value.FirstName @entry.Value.LastName</td>
+                <td><img src="@entry.Value.House"/></td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="note">HouseAssignments Component</div>
+
+@code
+{
+
+    public Dictionary<Guid, HouseAssignmentRecord> Students { get; set; } = new Dictionary<Guid, HouseAssignmentRecord>();
+
+    protected override void OnInitialized()
+    {
+        //Subscribe Component to Specific Message
+        Bus.Subscribe(typeof(StudentAdded), (sender, e) => StudentAddedHandler(e));
+        Bus.Subscribe(typeof(HouseAssigned), (sender, e) => HouseAssignedHandler(e));
+    }
+
+    private void StudentAddedHandler(MessageArgs args)
+    {
+        var message = args.GetMessage<StudentAdded>();
+
+        var record = new HouseAssignmentRecord
+        {
+            FirstName = message.FirstName,
+            LastName = message.LastName
+        };
+
+        Students.Add(message.Id, record);
+        this.InvokeAsync(StateHasChanged);
+    }
+
+    private void HouseAssignedHandler(MessageArgs args)
+    {
+        var message = args.GetMessage<HouseAssigned>();
+
+        Students[message.Id].House = "_content/HogwartsEnrollment/images/" + message.House;
+
+        this.InvokeAsync(StateHasChanged);
+
+    }
+}

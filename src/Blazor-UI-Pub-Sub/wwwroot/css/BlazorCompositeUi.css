@@ -1,0 +1,41 @@
+﻿table, tr, td {
+    border: 1px solid gray;
+    width: 100%;
+}
+
+td {
+    width: 50%
+}
+
+#box1 {
+    display: block;
+    margin-bottom: 60px;
+    padding: 20px 20px;
+    background-color: lightgreen;
+}
+
+#box2, #box3 {
+    float: left;
+    width: 50%;
+    min-height: 100px;
+}
+
+#box2 {
+    padding-right: 10px;
+    background-color:lightyellow;
+}
+
+#box3 {
+    padding-left: 10px;
+    background-color:lightpink;
+}
+
+.addStudent div, .addStudent button {
+    display: inline;
+}
+
+.note {
+    font-size: 10px;
+    padding-top: 30px;
+    font-weight: bold;
+}

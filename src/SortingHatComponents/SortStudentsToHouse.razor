@@ -1,0 +1,67 @@
+﻿@using System.Threading
+@using SortingHatComponents.Contracts.Events
+@using StudentComponents.Contracts.Events
+
+<div class="sortStudents">
+    <div style="display:@SortingMessageCss">
+        Sorting Witch or Wizard into house..........<br /><br />
+        <img src="_content/SortingHatComponents/images/sorting-hat.png" />
+    </div>
+
+    <div style="display:@HouseMessageCss">
+        <img src="_content/SortingHatComponents/images/@HouseImage" />
+    </div>
+</div>
+<div class="note">SortStudentsToHouse Component</div>
+
+@code
+{
+    public string SortingMessageCss { get; set; } = "none";
+    public string HouseMessageCss { get; set; } = "none";
+    public string HouseImage { get; set; }
+
+    private Dictionary<int, string> _houses = new Dictionary<int, string>
+    {
+        {1, "gryffindor.png"},
+        {2, "hufflepuff.png"},
+        {3, "ravenclaw.png"},
+        {4, "slytherin.png"}
+    };
+
+    private readonly Random _random = new Random();
+
+    protected override void OnInitialized()
+    {
+        //Subscribe Component to Specific Message
+        Bus.Subscribe(typeof(StudentAdded), (sender, e) => StudentAddedHandler(e));
+    }
+
+    private void StudentAddedHandler(MessageArgs args)
+    {
+        var message = args.GetMessage<StudentAdded>();
+
+        //CSS for toggling
+        SortingMessageCss = "block";
+        HouseMessageCss = "none";
+        this.InvokeAsync(StateHasChanged);
+
+
+        //Slow it down a bit for better visibility for the user
+        Thread.Sleep(TimeSpan.FromSeconds(1));
+
+        var randomNumber = _random.Next(1, 4);
+
+
+        //More CSS toggling and display of house image
+        SortingMessageCss = "none";
+        HouseMessageCss = "block";
+        HouseImage = _houses[randomNumber];
+        this.InvokeAsync(StateHasChanged);
+
+
+        //Slow it down a bit again
+        Thread.Sleep(TimeSpan.FromSeconds(2));
+        Bus.Publish(new HouseAssigned{ Id = message.Id, House = _houses[randomNumber] });
+    }
+
+}

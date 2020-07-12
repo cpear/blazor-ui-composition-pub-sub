@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Blazor_UI_Pub_Sub</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorComponentBus\BlazorComponentBus.csproj" />
+    <ProjectReference Include="..\HogwartsEnrollment\HogwartsEnrollment.csproj" />
+    <ProjectReference Include="..\SortingHatComponents\SortingHatComponents.csproj" />
+    <ProjectReference Include="..\StudentComponents\StudentComponents.csproj" />
+  </ItemGroup>
+
+</Project>
