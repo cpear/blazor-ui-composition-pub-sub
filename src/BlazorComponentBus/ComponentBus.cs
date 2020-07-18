@@ -10,9 +10,11 @@ namespace BlazorComponentBus
         private List<KeyValuePair<Type, EventHandler<MessageArgs>>> _componentRegistrants = 
             new List<KeyValuePair<Type, EventHandler<MessageArgs>>>();
 
-//        private List<KeyValuePair<Type, EventHandler<MessageArgs>> _subscriberDictionary =
-//            new List<KeyValuePair<Type, EventHandler<MessageArgs>>>();
-        
+        /// <summary>
+        /// The mechanism that allows components to subscribe to a specific message type
+        /// </summary>
+        /// <param name="messageType"></param>
+        /// <param name="callBack"></param>
         public void Subscribe(Type messageType, EventHandler<MessageArgs> callBack)
         {
             _componentRegistrants.Add(new KeyValuePair<Type, EventHandler<MessageArgs>>(messageType, callBack));
@@ -26,13 +28,13 @@ namespace BlazorComponentBus
 
             var subscribers = _componentRegistrants.ToLookup(item => item.Key);
 
+            //Look for subscribers of this message type
+            //Call the subscriber and pass the message along
             foreach (var subscriber in subscribers[messageType])
             {
                 await Task.Run(() => subscriber.Value.Invoke(this, args));
             }
 
-            //Look for subscribers of this message type
-            //Call the subscriber and pass the message along
         } 
     }
 }
