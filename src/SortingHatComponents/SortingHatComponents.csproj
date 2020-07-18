@@ -7,6 +7,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="BlazorComponentBus" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.5" />
   </ItemGroup>
@@ -18,7 +19,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorComponentBus\BlazorComponentBus.csproj" />
     <ProjectReference Include="..\SortingHatComponents.Contracts\SortingHatComponents.Contracts.csproj" />
     <ProjectReference Include="..\StudentComponents.Contracts\StudentComponents.Contracts.csproj" />
   </ItemGroup>

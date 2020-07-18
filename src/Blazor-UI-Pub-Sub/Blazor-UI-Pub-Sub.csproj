@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorComponentBus\BlazorComponentBus.csproj" />
-    <ProjectReference Include="..\HogwartsEnrollment\HogwartsEnrollment.csproj" />
+    <PackageReference Include="BlazorComponentBus" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HogwartsEnrollmentComponents\HogwartsEnrollmentComponents.csproj" />
     <ProjectReference Include="..\SortingHatComponents\SortingHatComponents.csproj" />
     <ProjectReference Include="..\StudentComponents\StudentComponents.csproj" />
   </ItemGroup>

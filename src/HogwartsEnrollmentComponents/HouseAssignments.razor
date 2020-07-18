@@ -50,7 +50,7 @@
     {
         var message = args.GetMessage<HouseAssigned>();
 
-        Students[message.Id].House = "_content/HogwartsEnrollment/images/" + message.House;
+        Students[message.Id].House = "_content/HogwartsEnrollmentComponents/images/" + message.House;
 
         this.InvokeAsync(StateHasChanged);
 
