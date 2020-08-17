@@ -28,8 +28,8 @@
     protected override void OnInitialized()
     {
         //Subscribe Component to Specific Message
-        Bus.Subscribe(typeof(StudentAdded), (sender, e) => StudentAddedHandler(e));
-        Bus.Subscribe(typeof(HouseAssigned), (sender, e) => HouseAssignedHandler(e));
+        Bus.Subscribe<StudentAdded>(StudentAddedHandler);
+        Bus.Subscribe<HouseAssigned>(HouseAssignedHandler);
     }
 
     private void StudentAddedHandler(MessageArgs args)

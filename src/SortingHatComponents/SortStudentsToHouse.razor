@@ -33,7 +33,7 @@
     protected override void OnInitialized()
     {
         //Subscribe Component to Specific Message
-        Bus.Subscribe(typeof(StudentAdded), (sender, e) => StudentAddedHandler(e));
+        Bus.Subscribe<StudentAdded>(StudentAddedHandler);
     }
 
     private void StudentAddedHandler(MessageArgs args)
